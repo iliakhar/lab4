@@ -1,0 +1,83 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:lab4.ViewModels"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="450" d:DesignHeight="450"
+        x:Class="lab4.Views.MainWindow"
+        Icon="/Assets/avalonia-logo.ico"
+        Title="lab4"
+		MaxHeight="450"
+		MaxWidth="450"
+		Background="FloralWhite">
+
+    <Design.DataContext>
+        <vm:MainWindowViewModel/>
+    </Design.DataContext>
+	<StackPanel >
+		<TextBox Height="110" Background="#DBE1E8" Margin="3, 2" BorderBrush="#8E9EB3"
+				 FontSize="50" Focusable="False" IsUndoEnabled="False" IsHitTestVisible="False"
+				 Watermark="Write something" HorizontalContentAlignment="Left"
+				 VerticalContentAlignment="Center" BorderThickness="0" Text="{Binding Greeting}">
+		</TextBox>
+		
+		<Grid MinHeight="336" MinWidth="448" ColumnDefinitions="1*,1*,1*,1*"
+			  RowDefinitions="1*,1*,1*" ShowGridLines="False">
+			<Button HorizontalAlignment="Center" VerticalAlignment="Center" MinWidth="107" MinHeight="107"
+					HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="36"
+					Background="#B0C4DE" Foreground="#181B1F" Grid.Row="0" Grid.Column="0"
+					 Name="btn1" Command="{Binding OnClickCommand}" CommandParameter="I">I</Button>
+			<Button HorizontalAlignment="Center" VerticalAlignment="Center" MinWidth="107" MinHeight="107"
+					HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="36"
+					Background="#B0C4DE" Foreground="#181B1F" Grid.Row="0" Grid.Column="1"
+					 Name="btn2" Command="{Binding OnClickCommand}" CommandParameter="L">L</Button>
+			<Button HorizontalAlignment="Center" VerticalAlignment="Center" MinWidth="107" MinHeight="107"
+					HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="36"
+					Background="#B0C4DE" Foreground="#181B1F" Grid.Row="0" Grid.Column="2"
+					 Name="btn3" Command="{Binding OnClickCommand}" CommandParameter="M">M</Button>
+
+			<Button HorizontalAlignment="Center" VerticalAlignment="Center" MinWidth="107" MinHeight="107"
+					HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="36"
+					Background="#B0C4DE" Foreground="#181B1F" Grid.Row="1" Grid.Column="0"
+					 Name="btn4" Command="{Binding OnClickCommand}" CommandParameter="V">V</Button>
+			<Button HorizontalAlignment="Center" VerticalAlignment="Center" MinWidth="107" MinHeight="107"
+					HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="36"
+					Background="#B0C4DE" Foreground="#181B1F" Grid.Row="1" Grid.Column="1"
+					 Name="btn5" Command="{Binding OnClickCommand}" CommandParameter="C">C</Button>
+
+			<Button HorizontalAlignment="Center" VerticalAlignment="Center" MinWidth="107" MinHeight="107"
+					HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="36"
+					Background="#B0C4DE" Foreground="#181B1F" Grid.Row="2" Grid.Column="0"
+					 Name="btn6" Command="{Binding OnClickCommand}" CommandParameter="X">X</Button>
+			<Button HorizontalAlignment="Center" VerticalAlignment="Center" MinWidth="107" MinHeight="107"
+					HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="36"
+					Background="#B0C4DE" Foreground="#181B1F" Grid.Row="2" Grid.Column="1"
+					 Name="btn7" Command="{Binding OnClickCommand}" CommandParameter="D">D</Button>
+
+			<Button HorizontalAlignment="Center" VerticalAlignment="Center" MinWidth="107" MinHeight="107"
+					HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="36"
+					Background="#8897AB" Foreground="#181B1F" Grid.Row="0" Grid.Column="3" CommandParameter="*"
+					 Name="btn8" Command="{Binding OnClickOper}" IsEnabled="{Binding IsOperButtonEnable}">*</Button>
+			<Button HorizontalAlignment="Center" VerticalAlignment="Center" MinWidth="107" MinHeight="107"
+					HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="36"
+					Background="#8897AB" Foreground="#181B1F" Grid.Row="1" Grid.Column="2" CommandParameter="+"
+					 Name="btn9" Command="{Binding OnClickOper}" IsEnabled="{Binding IsOperButtonEnable}">+</Button>
+			<Button HorizontalAlignment="Center" VerticalAlignment="Center" MinWidth="107" MinHeight="107"
+					HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="36"
+					Background="#8897AB" Foreground="#181B1F" Grid.Row="1" Grid.Column="3" CommandParameter="/"
+					 Name="btn10" Command="{Binding OnClickOper}" IsEnabled="{Binding IsOperButtonEnable}">/</Button>
+			<Button HorizontalAlignment="Center" VerticalAlignment="Center" MinWidth="107" MinHeight="107"
+					HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="36"
+					Background="#8897AB" Foreground="#181B1F" Grid.Row="2" Grid.Column="2" CommandParameter="-"
+					 Name="btn11" Command="{Binding OnClickOper}" IsEnabled="{Binding IsOperButtonEnable}">-</Button>
+			<Button HorizontalAlignment="Center" VerticalAlignment="Center" MinWidth="107" MinHeight="107"
+					HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="36"
+					Background="#8897AB" Foreground="#181B1F" Grid.Row="2" Grid.Column="3"
+					 Name="btn12" Command="{Binding OnClickEqual}" IsEnabled="{Binding IsOperButtonEnable}">=</Button>
+
+		</Grid>
+		
+	</StackPanel>
+	
+
+</Window>
