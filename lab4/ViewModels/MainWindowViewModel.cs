@@ -9,12 +9,14 @@ namespace lab4.ViewModels
 {
     public class MainWindowViewModel : ViewModelBase
     {
-        string str;
+        string text;
+        string tbWatermark;
         bool isOperButtonEnable;
         public MainWindowViewModel()
         {
-            str = "";
+            text = "";
             IsOperButtonEnable = false;
+            TextBoxWatermark = "Write something";
             OnClickCommand = ReactiveCommand.Create<string, string>((s) => ClickButton(s));
             OnClickEqual = ReactiveCommand.Create(() => Calculation());
             OnClickOper = ReactiveCommand.Create<string, string>((s) => ClickOperButton(s));
@@ -52,67 +54,80 @@ namespace lab4.ViewModels
                             charOper = '+';
                             break;
                     }
-                    while (str.IndexOf(charOper) != -1)
+                    while (text.IndexOf(charOper) != -1)
                     {
                         borderOfNum[0] = 0;
-                        borderOfNum[1] = str.Length - 1;
-                        int operPos = str.LastIndexOf(charOper);
+                        borderOfNum[1] = text.Length - 1;
+                        int operPos = text.LastIndexOf(charOper);
 
-                        for (int j = operPos + 1; j < str.Length; j++)
+                        for (int j = operPos + 1; j < text.Length; j++)
                         {
-                            if (allCharOper.IndexOf(str[j]) != -1)
+                            if (allCharOper.IndexOf(text[j]) != -1)
                             {
                                 borderOfNum[1] = j - 1;
                                 break;
                             }
                         }
-                        rn2 = str.Substring(operPos + 1, borderOfNum[1] - operPos);
+                        rn2 = text.Substring(operPos + 1, borderOfNum[1] - operPos);
 
                         for (int j = operPos - 1; j > 0; j--)
                         {
-                            if (allCharOper.IndexOf(str[j]) != -1)
+                            if (allCharOper.IndexOf(text[j]) != -1)
                             {
                                 borderOfNum[0] = j + 1;
                                 break;
                             }
                         }
-                        rn1 = str.Substring(borderOfNum[0], operPos - borderOfNum[0]);
-                        Greeting = str.Substring(0, borderOfNum[0]) + oper(new RomanNumberExtend(rn1), new RomanNumberExtend(rn2)).ToString() +
-                            str.Substring(borderOfNum[1] + 1, str.Length - 1 - borderOfNum[1]);
+                        rn1 = text.Substring(borderOfNum[0], operPos - borderOfNum[0]);
+                        TextBoxText = text.Substring(0, borderOfNum[0]) + oper(new RomanNumberExtend(rn1), new RomanNumberExtend(rn2)).ToString() +
+                            text.Substring(borderOfNum[1] + 1, text.Length - 1 - borderOfNum[1]);
 
                     }
                 } 
             }
             catch (RomanNumberException)
             {
-                Greeting = "";
+                TextBoxText = "";
                 IsOperButtonEnable = false;
+                TextBoxWatermark = "Error";
             }
             return 0;
 
         }
         private string ClickOperButton(string s)
         {
-            Greeting += s;
+            TextBoxText += s;
             IsOperButtonEnable = false;
-            return str;
+            return text;
         }
 
         private string ClickButton(string s)
         {
-            Greeting += s;
+            TextBoxText += s;
             IsOperButtonEnable = true;
-            return str;
+            return text;
         }
-        public string Greeting
+        public string TextBoxText
         {
             set
             {
-                    this.RaiseAndSetIfChanged(ref str, value);
+                    this.RaiseAndSetIfChanged(ref text, value);
             }
             get
             {
-                return str;
+                return text;
+            }
+        }
+        
+        public string TextBoxWatermark
+        {
+            set
+            {
+                this.RaiseAndSetIfChanged(ref tbWatermark, value);
+            }
+            get
+            {
+                return tbWatermark;
             }
         }
 

@@ -17,8 +17,8 @@
 	<StackPanel >
 		<TextBox Height="110" Background="#DBE1E8" Margin="3, 2" BorderBrush="#8E9EB3"
 				 FontSize="50" Focusable="False" IsUndoEnabled="False" IsHitTestVisible="False"
-				 Watermark="Write something" HorizontalContentAlignment="Left"
-				 VerticalContentAlignment="Center" BorderThickness="0" Text="{Binding Greeting}">
+				 Watermark="{Binding TextBoxWatermark}" HorizontalContentAlignment="Left"
+				 VerticalContentAlignment="Center" BorderThickness="0" Text="{Binding TextBoxText}">
 		</TextBox>
 		
 		<Grid MinHeight="336" MinWidth="448" ColumnDefinitions="1*,1*,1*,1*"
