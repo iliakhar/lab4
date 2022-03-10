@@ -25,60 +25,71 @@ namespace lab4.ViewModels
         private delegate RomanNumber Operation(RomanNumber? rn1, RomanNumber? rn2);
         private int Calculation()
         {
-            Operation oper = RomanNumber.Mul;
-            char charOper = ' ';
-            string allCharOper = "*/+-", rn1 = "", rn2 = "";
-            for (int i = 0; i < 4; i++)
+            try
             {
-                switch (i)
+                Operation oper = RomanNumber.Mul;
+                char charOper = ' ';
+                int[] borderOfNum = new int[2];
+                string allCharOper = "*/+-", rn1 = "", rn2 = "";
+                for (int i = 0; i < 4; i++)
                 {
-                    case 0:
-                        oper = RomanNumber.Mul;
-                        charOper = '*';
-                        break;
-                    case 1:
-                        oper = RomanNumber.Div;
-                        charOper = '/';
-                        break;
-                    case 2:
-                        oper = RomanNumber.Sub;
-                        charOper = '-';
-                        break;
-                    case 3:
-                        oper = RomanNumber.Add;
-                        charOper = '+';
-                        break;
-                }
-                while (str.IndexOf(charOper) != -1)
-                {
-                    int operPos = str.LastIndexOf(charOper);
-                    int[] borderOfNum = { 0, str.Length - 1 };
-                    for (int j = operPos + 1; j < str.Length; j++) 
+                    switch (i)
                     {
-                        if (allCharOper.IndexOf(str[j]) != -1)
-                        {
-                            borderOfNum[1] = j - 1;
+                        case 0:
+                            oper = RomanNumber.Mul;
+                            charOper = '*';
                             break;
-                        }
+                        case 1:
+                            oper = RomanNumber.Div;
+                            charOper = '/';
+                            break;
+                        case 2:
+                            oper = RomanNumber.Sub;
+                            charOper = '-';
+                            break;
+                        case 3:
+                            oper = RomanNumber.Add;
+                            charOper = '+';
+                            break;
                     }
-                    rn2 = str.Substring(operPos + 1, borderOfNum[1] - operPos);
-
-                    for (int j = operPos - 1; j > 0; j--)
+                    while (str.IndexOf(charOper) != -1)
                     {
-                        if (allCharOper.IndexOf(str[j]) != -1)
-                        {
-                            borderOfNum[0] = j + 1;
-                            break;
-                        }
-                    }
-                    rn1 = str.Substring(borderOfNum[0], operPos - borderOfNum[0]);
-                    Greeting = str.Substring(0, borderOfNum[0]) + oper(new RomanNumberExtend(rn1), new RomanNumberExtend(rn2)).ToString() +
-                        str.Substring(borderOfNum[1], str.Length - 1 - borderOfNum[1]);
+                        borderOfNum[0] = 0;
+                        borderOfNum[1] = str.Length - 1;
+                        int operPos = str.LastIndexOf(charOper);
 
-                }
+                        for (int j = operPos + 1; j < str.Length; j++)
+                        {
+                            if (allCharOper.IndexOf(str[j]) != -1)
+                            {
+                                borderOfNum[1] = j - 1;
+                                break;
+                            }
+                        }
+                        rn2 = str.Substring(operPos + 1, borderOfNum[1] - operPos);
+
+                        for (int j = operPos - 1; j > 0; j--)
+                        {
+                            if (allCharOper.IndexOf(str[j]) != -1)
+                            {
+                                borderOfNum[0] = j + 1;
+                                break;
+                            }
+                        }
+                        rn1 = str.Substring(borderOfNum[0], operPos - borderOfNum[0]);
+                        Greeting = str.Substring(0, borderOfNum[0]) + oper(new RomanNumberExtend(rn1), new RomanNumberExtend(rn2)).ToString() +
+                            str.Substring(borderOfNum[1] + 1, str.Length - 1 - borderOfNum[1]);
+
+                    }
+                } 
             }
-            
+            catch (RomanNumberException)
+            {
+                Greeting = "";
+                IsOperButtonEnable = false;
+            }
             return 0;
+
         }
         private string ClickOperButton(string s)
         {

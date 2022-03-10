@@ -54,6 +54,22 @@ namespace lab3Test
         }
 
         [TestMethod]
+        public void RomanNumberExtendTest()
+        {
+            Assert.ThrowsException<RomanNumberException>(() => new RomanNumberExtend("IIX"));
+            Assert.ThrowsException<RomanNumberException>(() => new RomanNumberExtend("asd"));
+            Assert.ThrowsException<RomanNumberException>(() => new RomanNumberExtend("IIII"));
+            Assert.ThrowsException<RomanNumberException>(() => new RomanNumberExtend("IM"));
+            Assert.ThrowsException<RomanNumberException>(() => new RomanNumberExtend("VL"));
+            Assert.ThrowsException<RomanNumberException>(() => new RomanNumberExtend("VIV"));
+
+            Assert.AreEqual("LV", (new RomanNumberExtend("LV").ToString()));
+            Assert.AreEqual("IX", (new RomanNumberExtend("IX").ToString()));
+            Assert.AreEqual("MMI", (new RomanNumberExtend("MMI").ToString()));
+            Assert.AreEqual("IV", (new RomanNumberExtend("IV").ToString()));
+        }
+
+        [TestMethod]
         public void AddTest()
         {
             RomanNumber rn1 = new RomanNumber(20);
